@@ -1,46 +1,149 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Spin – Music Player</title>
-<link rel="stylesheet" href="style.css">
-</head>
-<body>
-<main class="player" id="player">
-  <div class="disc-wrap"><div class="disc"></div></div>
-  <div class="title" id="title">Nothing playing</div>
-  <div class="sub" id="sub">Add songs to start listening</div>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Spin – Music Player</title>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <main class="player" id="player">
+      <div class="disc-wrap">
+        <div class="disc"></div>
+      </div>
 
-  <div class="seek">
-    <span id="cur">0:00</span>
-    <input type="range" id="seek" min="0" max="100" step="0.1" value="0" aria-label="Seek">
-    <span id="dur">0:00</span>
-  </div>
+      <div class="title" id="title">Nothing playing</div>
+      <div class="sub" id="sub">Add songs to start listening</div>
 
-  <div class="controls">
-    <button id="shuffle" title="Shuffle (S)" aria-label="Shuffle"><svg viewBox="0 0 24 24"><path d="M17 3l4 4-4 4V8h-2.6l-3.1 4.4L8.9 9.6A4 4 0 0 0 5.6 8H3V6h2.6c1.6 0 3.1.8 4 2.1L11 9.9 13.3 6.6A3 3 0 0 1 15.8 5H17V3zM3 16h2.6c1.3 0 2.5-.6 3.3-1.7l.4-.5 1.4 2-.2.3A5 5 0 0 1 5.6 18H3v-2zm14-1l4 4-4 4v-3h-1.2a5 5 0 0 1-4-2.1l1.4-2a3 3 0 0 0 2.6 1.1H17v-2z"/></svg></button>
-    <button id="prev" title="Previous" aria-label="Previous"><svg viewBox="0 0 24 24"><path d="M6 6h2v12H6zm3.5 6l8.5 6V6z"/></svg></button>
-    <button id="play" title="Play / Pause (Space)" aria-label="Play"><svg viewBox="0 0 24 24" id="playIcon"><path d="M8 5v14l11-7z"/></svg></button>
-    <button id="next" title="Next" aria-label="Next"><svg viewBox="0 0 24 24"><path d="M16 6h2v12h-2zM6 18l8.5-6L6 6z"/></svg></button>
-    <button id="repeat" title="Repeat (R)" aria-label="Repeat"><svg viewBox="0 0 24 24"><path d="M7 7h10v3l4-4-4-4v3H5v6h2V7zm10 10H7v-3l-4 4 4 4v-3h12v-6h-2v4z"/></svg></button>
-  </div>
+      <div class="seek">
+        <span id="cur">0:00</span>
+        <input type="range" id="seek" min="0" max="100" step="0.1" value="0" aria-label="Seek">
+        <span id="dur">0:00</span>
+      </div>
 
-  <div class="volume">
-    <svg viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3A4.5 4.5 0 0 0 14 8v8a4.5 4.5 0 0 0 2.5-4z"/></svg>
-    <input type="range" id="vol" min="0" max="1" step="0.01" value="0.8" aria-label="Volume">
-  </div>
-  <div class="msg" id="msg" role="status"></div>
+      <div class="controls">
+        <button id="shuffle" title="Shuffle (S)" aria-label="Shuffle">
+          <svg viewBox="0 0 24 24"><path d="M17 3l4 4-4 4V8h-2.6l-3.1 4.4L8.9 9.6A4 4 0 0 0 5.6 8H3V6h2.6c1.6 0 3.1.8 4 2.1L11 9.9 13.3 6.6A3 3 0 0 1 15.8 5H17V3zM3 16h2.6c1.3 0 2.5-.6 3.3-1.7l.4-.5 1.4 2-.2.3A5 5 0 0 1 5.6 18H3v-2zm14-1l4 4-4 4v-3h-1.2a5 5 0 0 1-4-2.1l1.4-2a3 3 0 0 0 2.6 1.1H17v-2z"/></svg>
+        </button>
+        <button id="prev" title="Previous" aria-label="Previous">
+          <svg viewBox="0 0 24 24"><path d="M6 6h2v12H6zm3.5 6l8.5 6V6z"/></svg>
+        </button>
+        <button id="play" title="Play / Pause (Space)" aria-label="Play">
+          <svg viewBox="0 0 24 24" id="playIcon"><path d="M8 5v14l11-7z"/></svg>
+        </button>
+        <button id="next" title="Next" aria-label="Next">
+          <svg viewBox="0 0 24 24"><path d="M16 6h2v12h-2zM6 18l8.5-6L6 6z"/></svg>
+        </button>
+        <button id="repeat" title="Repeat (R)" aria-label="Repeat">
+          <svg viewBox="0 0 24 24"><path d="M7 7h10v3l4-4-4-4v3H5v6h2V7zm10 10H7v-3l-4 4 4 4v-3h12v-6h-2v4z"/></svg>
+        </button>
+      </div>
 
-  <div class="list-head">
-    <h2>Playlist <span id="count" style="color:var(--muted);font-weight:400"></span></h2>
-    <label class="add">Add songs
-      <input type="file" id="file" accept="audio/*,.mp3,.wav,.ogg,.oga,.m4a,.aac,.flac,.opus,.weba,.webm,.mp4" multiple>
-    </label>
-  </div>
-  <ul id="list"></ul>
-</main>
+      <div class="volume">
+        <svg viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3A4.5 4.5 0 0 0 14 8v8a4.5 4.5 0 0 0 2.5-4z"/></svg>
+        <input type="range" id="vol" min="0" max="1" step="0.01" value="0.8" aria-label="Volume">
+      </div>
+      <div class="msg" id="msg" role="status"></div>
 
-<script src="script.js"></script>
-</body>
+      <details class="eq" open>
+        <summary>Equalizer</summary>
+        <div class="eq-tools">
+          <select id="preset" aria-label="Equalizer preset">
+            <option value="flat">Flat</option>
+            <option value="bass">Bass Boost</option>
+            <option value="treble">Treble Boost</option>
+            <option value="vocal">Vocal</option>
+            <option value="rock">Rock</option>
+            <option value="pop">Pop</option>
+            <option value="classical">Classical</option>
+            <option value="custom" hidden>Custom</option>
+          </select>
+          <button class="reset" id="eqReset" type="button">Reset</button>
+        </div>
+        <div class="eq-bands">
+          <div class="band">
+            <span class="db">0</span>
+            <div class="slider-box">
+              <input type="range" min="-12" max="12" step="0.5" value="0" data-freq="31" aria-label="31 Hz">
+            </div>
+            <span>31</span>
+          </div>
+          <div class="band">
+            <span class="db">0</span>
+            <div class="slider-box">
+              <input type="range" min="-12" max="12" step="0.5" value="0" data-freq="62" aria-label="62 Hz">
+            </div>
+            <span>62</span>
+          </div>
+          <div class="band">
+            <span class="db">0</span>
+            <div class="slider-box">
+              <input type="range" min="-12" max="12" step="0.5" value="0" data-freq="125" aria-label="125 Hz">
+            </div>
+            <span>125</span>
+          </div>
+          <div class="band">
+            <span class="db">0</span>
+            <div class="slider-box">
+              <input type="range" min="-12" max="12" step="0.5" value="0" data-freq="250" aria-label="250 Hz">
+            </div>
+            <span>250</span>
+          </div>
+          <div class="band">
+            <span class="db">0</span>
+            <div class="slider-box">
+              <input type="range" min="-12" max="12" step="0.5" value="0" data-freq="500" aria-label="500 Hz">
+            </div>
+            <span>500</span>
+          </div>
+          <div class="band">
+            <span class="db">0</span>
+            <div class="slider-box">
+              <input type="range" min="-12" max="12" step="0.5" value="0" data-freq="1000" aria-label="1k Hz">
+            </div>
+            <span>1k</span>
+          </div>
+          <div class="band">
+            <span class="db">0</span>
+            <div class="slider-box">
+              <input type="range" min="-12" max="12" step="0.5" value="0" data-freq="2000" aria-label="2k Hz">
+            </div>
+            <span>2k</span>
+          </div>
+          <div class="band">
+            <span class="db">0</span>
+            <div class="slider-box">
+              <input type="range" min="-12" max="12" step="0.5" value="0" data-freq="4000" aria-label="4k Hz">
+            </div>
+            <span>4k</span>
+          </div>
+          <div class="band">
+            <span class="db">0</span>
+            <div class="slider-box">
+              <input type="range" min="-12" max="12" step="0.5" value="0" data-freq="8000" aria-label="8k Hz">
+            </div>
+            <span>8k</span>
+          </div>
+          <div class="band">
+            <span class="db">0</span>
+            <div class="slider-box">
+              <input type="range" min="-12" max="12" step="0.5" value="0" data-freq="16000" aria-label="16k Hz">
+            </div>
+            <span>16k</span>
+          </div>
+        </div>
+      </details>
+
+      <div class="list-head">
+        <h2>Playlist <span class="count" id="count"></span></h2>
+        <label class="add">
+          Add songs
+          <input type="file" id="file" accept="audio/*,.mp3,.wav,.ogg,.oga,.m4a,.aac,.flac,.opus,.weba,.webm,.mp4" multiple>
+        </label>
+      </div>
+      <ul id="list"></ul>
+    </main>
+
+    <script src="script.js"></script>
+  </body>
 </html>
